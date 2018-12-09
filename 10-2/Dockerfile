@@ -18,7 +18,7 @@ RUN curl -o /tmp/build/${PLV8_VERSION}.tar.gz -SL "https://github.com/plv8/plv8/
 WORKDIR /tmp/build 
 RUN echo ${PLV8_SHASUM} | sha256sum -c 
 RUN tar -xzf /tmp/build/${PLV8_VERSION}.tar.gz -C /tmp/build/ 
-RUN cd plv8-${PLV8_VERSION#?} && make static
+RUN cd plv8-${PLV8_VERSION#?} && make -j8 static
 RUN cd plv8-${PLV8_VERSION#?} && make install 
 RUN strip /usr/lib/postgresql/${PG_MAJOR}/lib/plv8.so 
 WORKDIR / 
